@@ -1,33 +1,39 @@
-var fs = require("fs");
-var command = process.argv[2];
-var stuff = process.argv.slice(3).join("+");
-var stuffPretty = process.argv.slice(3).join(" ");
-
 // Connecting all the npm packages
 require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var moment = require('moment');
 var axios = require("axios");
+var fs = require("fs");
 
 var spotify = new Spotify(keys.spotify);
 
-switch (command) {
-  case "concert-this":
-    concertCommand();
-    break;
+var fs = require("fs");
+var command = process.argv[2];
+var stuff = process.argv.slice(3).join("+");
+var stuffPretty = process.argv.slice(3).join(" ");
 
-  case "spotify-this-song":
-    spotifyCommand();
-    break;
-
-  case "movie-this":
-    movieCommand();
-    break;
-
-  case "do-what-it-says":
-    doCommand();
-    break;
+function liriBot(command,stuff) {
+  switch (command) {
+    case "concert-this":
+      concertCommand(stuff);
+      break;
+  
+    case "spotify-this-song":
+      spotifyCommand(stuff);
+      break;
+  
+    case "movie-this":
+      movieCommand(stuff);
+      break;
+  
+    case "do-what-it-says":
+      doCommand();
+      break;
+  
+    default:
+      console.log("That is not a valid command. Please try again.");
+  }
 }
 
 function concertCommand() {
@@ -131,5 +137,22 @@ function movieCommand() {
 }
 
 function doCommand() {
-  console.log("ddu du ddu du duu");
+  fs.readFile("random.txt","utf8",function(err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    var dataArr = data.split(",");
+    var splitStuff = dataArr[1].split(" ").join("+");
+    console.log(splitStuff);
+
+    var command = dataArr[0];
+    var stuff = splitStuff;
+    liriBot(command, stuff);
+  })
+  // * Using the `fs` Node package, LIRI will take the text inside of random.txt and then 
+  // use it to call one of LIRI's commands.
+  // * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
+  // * Edit the text in random.txt to test out the feature for movie-this and concert-this.
 }
+
+liriBot(command, stuff);
