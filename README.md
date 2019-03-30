@@ -1,38 +1,18 @@
-# liri-node-app
+# Liri-bot
 
-### Before You Begin
+A language Interpretation and Recognition Interface that uses command line in node to give you back data
 
-1. LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
-
-2. Below are the various Node packages used in this project:
-
-   * [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
-
-   * [Axios](https://www.npmjs.com/package/axios)
-
-     * You'll use Axios to grab data from the [OMDB API](http://www.omdbapi.com) and the [Bands In Town API](http://www.artists.bandsintown.com/bandsintown-api)
-
-   * [Moment](https://www.npmjs.com/package/moment)
-
-   * [DotEnv](https://www.npmjs.com/package/dotenv)
+LIRI will search Spotify for songs, Bands in Town for concerts and OMDB for movies
    
-## Submission Guide
+## Getting Started
+1. Clone this project down to your computer and install the necessary npm packages
+```
+npm install
+```
 
-Create and use a standard GitHub repository. As this is a CLI App, it cannot be deployed to GitHub pages or Heroku. This time you'll need to include screenshots, a GIF, and/or a video showing us that you have the app working with no bugs. You can include these screenshots/GIFs or a link to a video in a `README.md` file.
+2. Obtain a spotify key by following the steps in the [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api) documentation.
 
-* Include screenshots (or a GIF/Video) of the typical user flow of your application. Make sure to include the use of Spotify, Bands in Town, and OMDB.
-
-* Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers/other developers in the future what you built and why, and to show how it works.
-
-* Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
-
-If you haven't written a markdown file yet, [click here for a rundown](https://guides.github.com/features/mastering-markdown/), or just take a look at the raw file of these instructions.
-
-### Instructions
-
-1. Clone this project down to your computer, install the necessary npm packages, and obtain a spotify key
-
-2. Next, create a file named `.env`, add the following to it, replacing the values with your API keys (no quotes) once you have them:
+3. Next, create a file named `.env`, add the following to it, replacing the values with your API keys (no quotes) once you have them:
 
 ```js
 # Spotify API keys
@@ -46,25 +26,66 @@ SPOTIFY_SECRET=your-spotify-secret
 
 * If someone wanted to clone your app from github and run it themselves, they would need to supply their own `.env` file for it to work.
 
+## How to use LIRI
 
-### What Each Command Should Do
+* LIRI is able to take in 4 commands utilizing node.js
+    * concert-this
+    * spotify-this-song
+    * movie-this
+    * do-what-it-says
 
-4. `node liri.js do-what-it-says`
+## What each command does
+<img src='./images/concert-this.gif'><br>
+```
+example: node liri.js concert-this Anberlin
+```
+1. 'node liri.js concert-this \<band or artist name\>'
+    * Displays a current up-to-date list of results of where the band or artist is scheduled to perform
 
-   * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
+<img src='./images/spotify-this-song.gif'><br>
+```
+example: node liri.js spotify-this-song Beauty and the Beast
+```
 
-     * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
+2. 'node liri.js spotify-this-song \<song name\>'
+    * Displays the top 3 results of the song name
+    * If there is no song name inserted, the search will default to "The Sign" by Ace of Base
 
-     * Edit the text in random.txt to test out the feature for movie-this and concert-this.
+<img src='./images/movie-this.gif'><br>
+```
+example: node liri.js movie-this Spirited Away
+```
 
-### BONUS
+3. 'node liri.js movie-this \<movie title\>'
+    * Displays the following information
+        * Title of the movie
+        * Year of the movie
+        * IMDB Rating of the movie
+        * Rotten Tomatoes Rating of the movie
+        * Where was the movie produced
+        * Language of the movie
+        * Plot of the movie
+        * Actors in the movie
+    * If there is no movie title inserted, the search will default to Mr. Nobody
 
-* In addition to logging the data to your terminal/bash window, output the data to a .txt file called `log.txt`.
+<img src='./images/do-what-it-says.gif'><br>
+```
+example: node liri.js do-what-it-says
+```
 
-* Make sure you append each command you run to the `log.txt` file. 
+4. 'node liri.js do-what-it-says'
+    * Takes the text from random.txt and runs the song through the spotify-this-song command
+    * Edit the text in random.txt to test out the feature for spotify-this-song and concert-this!
 
-* Do not overwrite your file each time you run a command.
+* In addition to logging out your results to the terminal, it will log out your inputs and results in a log.txt file!
 
-### Add To Your Portfolio
+## Technology Used:
+
+   * [Node.js](https://nodejs.org/en/)
+   * [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
+   * [Axios](https://www.npmjs.com/package/axios)
+     * Axios will grab data from the [OMDB API](http://www.omdbapi.com) and the [Bands In Town API](http://www.artists.bandsintown.com/bandsintown-api)
+   * [Moment](https://www.npmjs.com/package/moment)
+   * [DotEnv](https://www.npmjs.com/package/dotenv)
 
 - - -

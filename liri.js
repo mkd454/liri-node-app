@@ -45,7 +45,6 @@ function concertCommand() {
   if(!stuff) {
     text = `Unfortunately, you forgot to input a search item. Please try again.`
     console.log(chalk.red(text));
-
     logRuns(text);
   } else {
     axios.get("https://rest.bandsintown.com/artists/" + stuff + "/events?app_id=codingbootcamp").then(
@@ -53,20 +52,18 @@ function concertCommand() {
         if (res.data.length == 0) {
           text = `Unfortunately, ${stuff} has no planned events. Please try another band.`
           console.log(chalk.red(text));
-
           logRuns(text);
         } else {
           for (var i = 1; i < res.data.length; i++) {
             text = 
-`------------------------
+`
 Results for ${stuffPretty}:
 Event: ${i}
 Venue Name: ${res.data[i].venue.name}
 Venue Location: ${res.data[i].venue.city}, ${res.data[i].venue.country}
 Date of Event: ${moment(res.data[i].datetime).format("MM/DD/YYYY")}
-------------------------`
+`
             console.log(chalk.blue(text));
-
             logRuns(text);
           }
         }
@@ -86,16 +83,13 @@ function spotifyCommand() {
       var defaultSong = data.tracks.items[9];
       text = 
 `
-
 You did not input a song to search. Checkout the song below instead!
 Default Artist: ${defaultSong.artists[0].name}
 Default Song Name: ${defaultSong.name}
 Preview link: ${defaultSong.external_urls.spotify}
 Album: ${defaultSong.album.name}
-
 `
       console.log(chalk.red(text));
-
       logRuns(text);
     })
   } else {
@@ -103,25 +97,24 @@ Album: ${defaultSong.album.name}
       if (err) {
         return console.log('Error occurred: ' + err);
       }
-    
-      var songInfo = data.tracks.items[0];
-      var artistList = [];
-      for (var x = 0; x < songInfo.artists.length; x++) {
-        artistList.push(songInfo.artists[x].name);
-      }
-      text = 
+      
+      for (var q = 0; q < 3; q++) {
+        var songInfo = data.tracks.items[q];
+        var artistList = [];
+        for (var x = 0; x < songInfo.artists.length; x++) {
+          artistList.push(songInfo.artists[x].name);
+        }
+        text = 
 `
-
 Results for ${stuffPretty}:
 Artist(s): ${artistList.join(", ")}
 Song Name: ${songInfo.name}
 Preview link: ${songInfo.external_urls.spotify}
 Album: ${songInfo.album.name}
-
 `
-      console.log(chalk.green(text));
-
-      logRuns(text);
+        console.log(chalk.green(text));
+        logRuns(text);
+      }
     })
   }
 }
@@ -130,9 +123,9 @@ function movieCommand() {
   if (!stuff) {
     axios.get("http://www.omdbapi.com/?apikey=trilogy&type=movie&t=Mr.+Nobody").then(
       function (res) {
-      // If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-      text = 
-`------------------------
+        // If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
+        text = 
+`
 You did not input a movie to search. Checkout the movie below instead!
 Movie: ${res.data.Title}
 Year of release: ${res.data.Year}
@@ -142,18 +135,16 @@ Country the movie was produced in: ${res.data.Country}
 Language: ${res.data.Language}
 Plot: ${res.data.Plot}
 Actors: ${res.data.Actors}
-------------------------`
-
-        console.log(chalk.red(text));
-
-        logRuns(text);
+`
+          console.log(chalk.red(text));
+          logRuns(text);
       }
     )
   } else {
     axios.get("http://www.omdbapi.com/?apikey=trilogy&type=movie&t=" + stuff).then(
       function (res) {
-      text = 
-`------------------------
+        text = 
+`
 Results for ${stuffPretty}:
 Movie: ${res.data.Title}
 Year of release: ${res.data.Year}
@@ -163,13 +154,15 @@ Country the movie was produced in: ${res.data.Country}
 Language: ${res.data.Language}
 Plot: ${res.data.Plot}
 Actors: ${res.data.Actors}
-------------------------`
-
+`
         console.log(chalk.yellow(text));
-
         logRuns(text);
       }
-    )
+    ).catch(function(err){
+      text = `Unfortunately, this movie does not exist in the data base. Please try another movie.`
+      console.log(chalk.red(text));
+      logRuns(text);
+    })
   }
 }
 
@@ -193,9 +186,6 @@ function logRuns(text) {
     if (err) {
       return console.log(err);
     } 
-    // else {
-    //   console.log(chalk.magenta("log.txt was updated!"));
-    // }
   });
 }
 
