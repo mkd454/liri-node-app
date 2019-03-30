@@ -35,26 +35,20 @@ SPOTIFY_SECRET=your-spotify-secret
     * do-what-it-says
 
 ## What each command does
-<img src='./images/concert-this.gif'><br>
+1. 'node liri.js concert-this \<band or artist name\>'
+    * Displays a current up-to-date list of results of where the band or artist is scheduled to perform
 ```
 example: node liri.js concert-this Anberlin
 ```
-1. 'node liri.js concert-this \<band or artist name\>'
-    * Displays a current up-to-date list of results of where the band or artist is scheduled to perform
-
-<img src='./images/spotify-this-song.gif'><br>
-```
-example: node liri.js spotify-this-song Beauty and the Beast
-```
+<img src='./images/concert-this.gif'><br>
 
 2. 'node liri.js spotify-this-song \<song name\>'
     * Displays the top 3 results of the song name
     * If there is no song name inserted, the search will default to "The Sign" by Ace of Base
-
-<img src='./images/movie-this.gif'><br>
 ```
-example: node liri.js movie-this Spirited Away
+example: node liri.js spotify-this-song Beauty and the Beast
 ```
+<img src='./images/spotify-this-song.gif'><br>
 
 3. 'node liri.js movie-this \<movie title\>'
     * Displays the following information
@@ -67,15 +61,19 @@ example: node liri.js movie-this Spirited Away
         * Plot of the movie
         * Actors in the movie
     * If there is no movie title inserted, the search will default to Mr. Nobody
+```
+example: node liri.js movie-this Spirited Away
+```
+<img src='./images/movie-this.gif'><br>
 
-<img src='./images/do-what-it-says.gif'><br>
-```
-example: node liri.js do-what-it-says
-```
 
 4. 'node liri.js do-what-it-says'
     * Takes the text from random.txt and runs the song through the spotify-this-song command
     * Edit the text in random.txt to test out the feature for spotify-this-song and concert-this!
+```
+example: node liri.js do-what-it-says
+```
+<img src='./images/do-what-it-says.gif'><br>
 
 * In addition to logging out your results to the terminal, it will log out your inputs and results in a log.txt file!
 
@@ -87,5 +85,18 @@ example: node liri.js do-what-it-says
      * Axios will grab data from the [OMDB API](http://www.omdbapi.com) and the [Bands In Town API](http://www.artists.bandsintown.com/bandsintown-api)
    * [Moment](https://www.npmjs.com/package/moment)
    * [DotEnv](https://www.npmjs.com/package/dotenv)
+
+## Where users can get help with this project
+If you need assistance, please reach out to this email with your questions and concerns: <dangmaryk@gmail.com>.
+
+## Who maintains and contributes to this project 
+Mary Dang  
+Github Repository link: <https://github.com/mkd454/liri-node-app>
+Portfolio link: <https://mkd454.github.io/Portfolio-V2/>
+
+## Acknowledgments
+
+* Thanks to The Coding Boot Camp at UT Austin
+
 
 - - -
